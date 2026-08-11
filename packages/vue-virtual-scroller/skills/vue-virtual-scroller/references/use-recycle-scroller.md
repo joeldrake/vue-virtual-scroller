@@ -37,6 +37,7 @@ Optional extras:
 - `cache`
 - `disableTransform`
 - `flowMode`
+- `itemsLimit` (default `1000`): positive per-instance rendered-view safety limit override. Sparse two-axis grids count actual rendered views.
 - `enabled` (default `true`): passive-mount switch. When `false`, no
   watchers/observers/listeners/RAFs/timers run, exposed values stay at inert
   defaults (`pool` empty, `totalSize` 0, `ready` false, `sizes` empty),

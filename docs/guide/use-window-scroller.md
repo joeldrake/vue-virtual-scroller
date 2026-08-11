@@ -67,6 +67,7 @@ Common options:
 - `prerender`
 - `emitUpdate`
 - `updateInterval`
+- `itemsLimit` (default `1000`) — positive per-instance override for the rendered-view safety guard
 - `enabled` (default `true`) — passive mount switch, same semantics as
   [`useRecycleScroller`](./use-recycle-scroller#disabling-the-scroller-with-enabled).
   When `false`, no window scroll listener, no observers, no watchers; the

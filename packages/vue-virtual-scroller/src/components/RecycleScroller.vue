@@ -39,6 +39,7 @@ const props = withDefaults(defineProps<{
   flowMode?: boolean
   hiddenPosition?: number
   updateInterval?: number
+  itemsLimit?: number
   skipHover?: boolean
   enabled?: boolean
   listClass?: ClassValue
@@ -65,6 +66,7 @@ const props = withDefaults(defineProps<{
   flowMode: false,
   hiddenPosition: undefined,
   updateInterval: 0,
+  itemsLimit: undefined,
   skipHover: false,
   enabled: true,
   listClass: '',
@@ -129,6 +131,7 @@ const recycleScrollerOptions = computed(() => ({
   flowMode: props.flowMode,
   hiddenPosition: props.hiddenPosition,
   updateInterval: props.updateInterval,
+  itemsLimit: props.itemsLimit,
   enabled: props.enabled,
   onResize: () => emit('resize'),
   onVisible: () => emit('visible'),

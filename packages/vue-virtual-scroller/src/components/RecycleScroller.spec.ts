@@ -237,6 +237,7 @@ describe('recycleScroller', () => {
         cache,
         flowMode: true,
         hiddenPosition: -321,
+        itemsLimit: 1234,
       },
       global: {
         stubs: {
@@ -255,6 +256,7 @@ describe('recycleScroller', () => {
     expect(resolvedOptions.cache).toStrictEqual(cache)
     expect(resolvedOptions.flowMode).toBe(true)
     expect(resolvedOptions.hiddenPosition).toBe(-321)
+    expect(resolvedOptions.itemsLimit).toBe(1234)
   })
 
   it('renders flow-mode spacers and exposes spacer refs', async () => {

@@ -34,6 +34,7 @@ Common props:
 - `shift`
 - `cache`
 - `disableTransform`
+- `itemsLimit` (default `1000`) for a positive per-instance rendered-view safety limit override
 
 Mode-specific props:
 
@@ -50,6 +51,7 @@ Documented behavior:
 
 - `itemSize` accepts a fixed number, `null`, or `(item, index) => number`
 - `gridItems` still requires a fixed numeric `itemSize`
+- sparse two-axis grids apply `itemsLimit` to actual rendered views, not the flattened index span
 - `pageMode` still exists, but new code should prefer `WindowScroller` for page scrolling
 - `flowMode` keeps active pooled views in DOM order and inserts spacer elements before and after the active window
 

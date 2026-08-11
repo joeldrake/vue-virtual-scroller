@@ -36,6 +36,7 @@ Most-used props:
 - `shift`
 - `cache`
 - `disableTransform`
+- `itemsLimit` (default `1000`) for a positive per-instance rendered-view safety limit override
 - `enabled` (default `true`): pass `:enabled="false"` for a passive mount.
   No window scroll listener, no observers, no watchers, empty pool. Toggle
   to `true` to re-arm without remounting.

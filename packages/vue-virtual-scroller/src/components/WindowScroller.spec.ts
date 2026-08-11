@@ -109,6 +109,7 @@ describe('windowScroller', () => {
         shift: true,
         cache,
         hiddenPosition: -456,
+        itemsLimit: 1234,
       },
       slots: {
         default: ({ item }: any) => h('div', { class: 'row' }, item.label),
@@ -137,6 +138,7 @@ describe('windowScroller', () => {
     expect(resolvedOptions.shift).toBe(true)
     expect(resolvedOptions.cache).toStrictEqual(cache)
     expect(resolvedOptions.hiddenPosition).toBe(-456)
+    expect(resolvedOptions.itemsLimit).toBe(1234)
 
     const itemView = wrapper.get('.vue-recycle-scroller__item-view').element as HTMLElement
     expect(itemView.style.transform).toBe('translateY(40px) translateX(12px)')

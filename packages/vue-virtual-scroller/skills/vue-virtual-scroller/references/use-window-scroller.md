@@ -31,6 +31,7 @@ Common options:
 - `shift`
 - `cache`
 - `disableTransform`
+- `itemsLimit` (default `1000`) for a positive per-instance rendered-view safety limit override
 - `enabled` (default `true`): pass `enabled: false` for a passive mount,
   same semantics as `useRecycleScroller`. While disabled, no window scroll
   listener, no observers, and an empty pool. Toggle to `true` to re-arm.

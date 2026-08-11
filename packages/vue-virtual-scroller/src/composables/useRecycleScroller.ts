@@ -36,6 +36,11 @@ export interface UseRecycleScrollerOptions<TItem = unknown, TSizeField extends s
    */
   hiddenPosition?: number
   updateInterval: number
+  /**
+   * Maximum views this scroller may render before reporting a missing scroll boundary.
+   * Positive values override the global limit for this instance.
+   */
+  itemsLimit?: number
 }
 
 export interface UseRecycleScrollerReturn<TItem = unknown, TKey = ItemKey<TItem>> {
@@ -1438,7 +1443,11 @@ export function useRecycleScroller<TOptions extends UseRecycleScrollerOptions<an
       }
     }
 
-    if (endIndex - startIndex > config.itemsLimit) {
+    const itemsLimit = typeof opts.itemsLimit === 'number' && opts.itemsLimit > 0
+      ? opts.itemsLimit
+      : config.itemsLimit
+    const renderedItemsCount = renderedIndices?.length ?? endIndex - startIndex
+    if (renderedItemsCount > itemsLimit) {
       itemsLimitError()
     }
 

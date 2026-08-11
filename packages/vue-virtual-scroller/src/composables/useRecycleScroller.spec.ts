@@ -2,6 +2,7 @@ import type { View } from '../types'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 import { defineComponent, nextTick, reactive, ref } from 'vue'
+import config from '../config'
 import { useRecycleScroller } from './useRecycleScroller'
 
 function createView(index: number, used = true): View {
@@ -34,6 +35,7 @@ function mountHarness(overrides: Partial<{
   flowMode: boolean
   hiddenPosition: number
   updateInterval: number
+  itemsLimit: number | undefined
   clientHeight: number
   clientWidth: number
 }> = {}) {
@@ -60,6 +62,7 @@ function mountHarness(overrides: Partial<{
     flowMode: false,
     hiddenPosition: undefined,
     updateInterval: 0,
+    itemsLimit: undefined,
     ...overrides,
   })
 
@@ -404,6 +407,77 @@ describe('useRecycleScroller', () => {
     vm.updateVisibleItems(false)
 
     expect(vm.visiblePool.map((view: View) => view.nr.index).sort((a: number, b: number) => a - b)).toEqual([1, 2, 5, 6, 9, 10])
+  })
+
+  it('counts sparse grid views instead of their flattened index span for the item limit', async () => {
+    const { vm } = mountHarness({
+      items: Array.from({ length: 3000 }, (_, id) => ({ id })),
+      itemSize: 10,
+      gridItems: 300,
+      itemSecondarySize: 10,
+      clientHeight: 100,
+      clientWidth: 20,
+    })
+
+    await nextTick()
+    await nextTick()
+
+    expect(vm.visiblePool.map((view: View) => view.nr.index).sort((a: number, b: number) => a - b)).toEqual(
+      Array.from({ length: 10 }, (_, row) => [row * 300, row * 300 + 1]).flat(),
+    )
+  })
+
+  it('uses an instance item limit instead of the global default', async () => {
+    const previousItemsLimit = config.itemsLimit
+    const { wrapper, vm } = mountHarness({
+      items: Array.from({ length: 20 }, (_, id) => ({ id })),
+      itemSize: 10,
+      clientHeight: 50,
+      itemsLimit: 5,
+    })
+
+    await nextTick()
+    await nextTick()
+
+    try {
+      config.itemsLimit = 4
+      expect(() => vm.updateVisibleItems(false)).not.toThrow()
+    }
+    finally {
+      config.itemsLimit = previousItemsLimit
+      wrapper.unmount()
+    }
+  })
+
+  it('keeps the global item limit for ordinary lists and grids without an instance override', async () => {
+    const previousItemsLimit = config.itemsLimit
+    const listHarness = mountHarness({
+      items: Array.from({ length: 20 }, (_, id) => ({ id })),
+      itemSize: 10,
+      clientHeight: 50,
+    })
+    const gridHarness = mountHarness({
+      items: Array.from({ length: 16 }, (_, id) => ({ id })),
+      itemSize: 10,
+      gridItems: 4,
+      itemSecondarySize: 10,
+      clientHeight: 30,
+      clientWidth: 20,
+    })
+
+    await nextTick()
+    await nextTick()
+
+    try {
+      config.itemsLimit = 4
+      expect(() => listHarness.vm.updateVisibleItems(false)).toThrow('Rendered items limit reached')
+      expect(() => gridHarness.vm.updateVisibleItems(false)).toThrow('Rendered items limit reached')
+    }
+    finally {
+      config.itemsLimit = previousItemsLimit
+      listHarness.wrapper.unmount()
+      gridHarness.wrapper.unmount()
+    }
   })
 
   it('scrolls grid items into view on both axes', async () => {

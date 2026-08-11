@@ -252,12 +252,12 @@ Then:
 
 ## Current generation metadata
 
-- Last generation date: `2026-04-16T16:23:23+02:00`
-- Baseline commit SHA: `90b17624d12848db5c88da4713a6b318f3ab0ca3`
-- Baseline short SHA: `90b1762`
-- Baseline commit date: `2026-04-16T16:17:31+02:00`
-- Baseline commit message: `refactor: simplified useDynamicScroller API`
-- Version notes: added public `useTableColumnWidths` coverage and refreshed headless `flowMode` / spacer guidance
+- Last generation date: `2026-08-11T17:50:00+02:00`
+- Baseline commit SHA: `d6eb943fa9bd53fb6a85ab0c70330ac7b7a36bb9`
+- Baseline short SHA: `d6eb943`
+- Baseline commit date: `2026-05-20T12:34:09+02:00`
+- Baseline commit message: `v3.0.4`
+- Version notes: documented the public per-instance `itemsLimit` override and sparse two-axis grid counting across component and headless surfaces
 - Generated artifacts:
   - `packages/vue-virtual-scroller/skills/vue-virtual-scroller/SKILL.md`
   - `packages/vue-virtual-scroller/skills/vue-virtual-scroller/references/index.md`

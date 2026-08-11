@@ -100,6 +100,7 @@ The most commonly used props are:
 - `prerender`
 - `emitUpdate`
 - `updateInterval`
+- `itemsLimit` (default `1000`) — positive per-instance override for the rendered-view safety guard
 - `enabled` (default `true`) — set to `false` to mount the component passively. No window scroll listener, no resize observer, no watchers, no measurement. Toggle back to `true` to re-arm without remounting.
 - `listTag`
 - `itemTag`
