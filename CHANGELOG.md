@@ -1,3 +1,15 @@
+## v3.0.5
+
+[compare changes](https://github.com/Akryum/vue-virtual-scroller/compare/v3.0.4...v3.0.5)
+
+### 🩹 Fixes
+
+- **useRecycleScroller:** Count sparse grid views for item limit ([bc1ada9](https://github.com/Akryum/vue-virtual-scroller/commit/bc1ada9))
+
+### ❤️ Contributors
+
+- Guillaume Chau ([@Akryum](http://github.com/Akryum))
+
 ## v3.0.4
 
 [compare changes](https://github.com/Akryum/vue-virtual-scroller/compare/v3.0.3...v3.0.4)
